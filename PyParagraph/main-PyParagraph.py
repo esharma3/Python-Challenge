@@ -17,21 +17,22 @@ in_file = os.path.join('Input & Output','paragraph_' + str(fileNum) + '.txt')
 out_file = os.path.join('Input & Output', 'paragraph_' + str(fileNum) + '_analysis' '.txt')
 
 
-with open(in_file, "r") as in_text:
+with open(in_file, "r") as in_file:
 	
-	paragraph = in_text.read()
+	paragraph = in_file.read()
 
 	# Counting hyphenated words as two (splitting on space (\s) or '-')
 	words = re.split(r'[\s | -]', paragraph)  
-
 	word_count = len(words) 
 	
+
+	# Counting the number of sentences using regEx string from Stack Overflow
 	myRegEx = re.compile(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s')
 	sentences = myRegEx.split(paragraph)
-
 	sentence_count = len(sentences)
 
-	 
+	
+	# Calculating the average letter count and average senetence length 
 	for each_word in words:
 		letters_count = letters_count + len(each_word)
 
@@ -40,7 +41,7 @@ with open(in_file, "r") as in_text:
 	avg_sentence_len = round((len(words)/sentence_count), 0)
 
 
-
+# Preparing the summary of output
 result = (f'Paragraph Analysis' '\n-----------------------------' 
 		  f'\nApproximate Word Count: {word_count}' 
 		  f'\nApproximate Sentence Count: {sentence_count}'
