@@ -32,7 +32,7 @@ with open(in_file, "r") as in_file:
 	sentence_count = len(sentences)
 
 	
-	# Calculating the average letter count and average senetence length 
+	# Calculating the average letter count and average sentence length 
 	for each_word in words:
 		letters_count = letters_count + len(each_word)
 
