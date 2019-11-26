@@ -9,40 +9,40 @@ in_filepath = os.path.join("Input & Output","employee_data.csv")
 out_filepath = os.path.join("Input & Output","formatted_employee_data.csv")
 
 
-with open(out_filepath, "w+", newline ="") as out_text:
-	with open(in_filepath, "r") as in_text:
+with open(in_filepath, "r", newline ="") as in_file:
 
-		reader = csv.reader(in_text)
-		writer = csv.writer(out_text)
+	reader = csv.DictReader(in_file)
 
-		# Writing the output header before we start writing the data rows
-		out_header = ['Employee_ID', 'First_Name', 'Last_Name', 'DOB', 'SSN', 'State']
-		writer.writerow(out_header)
+	with open(out_filepath, "w", newline = "") as out_file:
 
-		# Pops the input header row 
-		in_header = next(in_text) 
-		
+		fieldnames = ['Employee ID', 'First Name', 'Last Name', 'DOB', 'SSN', 'State']
 
+		writer = csv.DictWriter(out_file, fieldnames=fieldnames, delimiter = ',')
+
+		# Writing the output header before we start writing the data rows		
+		writer.writeheader()
+
+				
 		for row in reader:
 			
-			Emp_ID = row[0]
+			Emp_ID = row['Emp ID']
 
 			# Formatting the name 
-			First_Name, Last_Name = row[1].split(" ", 1) # will return a list of 2 elements
+			First_Name, Last_Name = row['Name'].split(" ", 1) # will return a list of 2 elements
 
 			# Formatting the DOB 
-			frmt_date = datetime.strptime(row[2], "%Y-%m-%d")
-			DOB = frmt_date.strftime("%m/%d/%Y")
+			frmt_date = datetime.strptime(row['DOB'], "%Y-%m-%d")
+			dob = frmt_date.strftime("%m/%d/%Y")
 			
 			# Formatting the SSN
-			SSN = "***-**-" + row[3][7:]
+			ssn = "***-**-" + row['SSN'][7:]
 
-			# Formatting the Sate to get abbreviated state (.strip is used to strip away \n(s) from the end of each row)
-			State = row[4].strip()  
+			# Formatting the State to get abbreviated state (.strip is used to strip away \n(s) from the end of each row)
+			State = row['State'].strip()  
 			Abbrev_State = us_state_abbrev.get(State)
 			
             # Writing the formatted data to the output file
-			writer.writerow([Emp_ID, First_Name, Last_Name, DOB, SSN, Abbrev_State])
+			writer.writerow({'Employee ID': Emp_ID, 'First Name': First_Name, 'Last Name': Last_Name, 'DOB': dob, 'SSN': ssn, 'State': Abbrev_State})
 
 
 
