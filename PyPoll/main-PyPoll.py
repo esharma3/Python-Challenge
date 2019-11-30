@@ -58,7 +58,7 @@ print(output2)
 
 
 # Writing output to the file
-with open(out_filepath, 'w', newline = '') as out_file:
+with open(out_filepath, 'w+', newline = '') as out_file:
 
     out_file.write((output1 + '\n'))
 
