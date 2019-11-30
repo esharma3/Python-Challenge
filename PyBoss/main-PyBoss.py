@@ -13,7 +13,7 @@ with open(in_filepath, "r", newline ="") as in_file:
 
 	reader = csv.DictReader(in_file)
 
-	with open(out_filepath, "w", newline = "") as out_file:
+	with open(out_filepath, "w+", newline = "") as out_file:
 
 		fieldnames = ['Employee ID', 'First Name', 'Last Name', 'DOB', 'SSN', 'State']
 

@@ -65,7 +65,7 @@ summary = (
 	f"Greatest Decrease in Profits: {related_date2} (${min_increase})"
 	)
 
-# Printing output on the terminal  
+# Printing output to the terminal  
 print(summary)
 
 # Writing output to the file
